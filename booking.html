@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+  content="width=device-width, initial-scale=1.0">
+
+  <title>Book Car</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav class="navbar">
+<a href="index.html" class="logo-box">
+
+  <div class="logo-circle">MTS</div>
+
+  <div>
+    <h2>Mukasa Transport Service</h2>
+  </div>
+
+</a>
+
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html">Cars</a></li>
+    <li><a href="index.html">Services</a></li>
+    <!-- <li><a href="admin-login.html">Admin</a></li> -->
+  </ul>
+
+</nav>
+<div class="booking-page">
+
+<form class="booking-form" id="bookingForm">
+
+<h2>Book Your Car</h2>
+
+<input type="text"
+id="name"
+placeholder="Your Name"
+required>
+
+<input type="tel"
+id="phone"
+placeholder="Phone Number"
+required>
+
+<input type="text"
+id="car"
+readonly>
+
+<select id="service">
+
+<option>Without Driver</option>
+
+<option>With Driver</option>
+
+</select>
+
+<input type="date"
+id="date"
+required>
+
+<input type="number"
+id="days"
+placeholder="Number of Days"
+required>
+
+<textarea
+id="message"
+placeholder="Extra Details">
+</textarea>
+
+<button type="submit">
+Send To WhatsApp
+</button>
+
+</form>
+
+</div>
+
+<script>
+
+const params =
+new URLSearchParams(window.location.search);
+
+document.getElementById("car").value =
+params.get("car");
+
+document.getElementById("bookingForm")
+.addEventListener("submit", function(e){
+
+e.preventDefault();
+
+const name =
+document.getElementById("name").value;
+
+const phone =
+document.getElementById("phone").value;
+
+const car =
+document.getElementById("car").value;
+
+const service =
+document.getElementById("service").value;
+
+const date =
+document.getElementById("date").value;
+
+const days =
+document.getElementById("days").value;
+
+const message =
+document.getElementById("message").value;
+
+const text =
+`MTS BOOKING REQUEST
+
+Name: ${name}
+Phone: ${phone}
+Car: ${car}
+Service: ${service}
+Date: ${date}
+Days: ${days}
+
+Message:
+${message}`;
+
+window.open(
+`https://wa.me/250791758953?text=${encodeURIComponent(text)}`,
+"_blank"
+);
+
+});
+
+</script>
+
+</body>
+</html>
