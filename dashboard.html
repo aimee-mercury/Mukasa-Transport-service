@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard - Mukasa Transport Service</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+</head>
+
+<body>
+
+<!-- ADMIN NAVBAR -->
+<nav class="admin-navbar">
+  <div class="admin-nav-brand">
+    <h2><i class="fas fa-tachometer-alt"></i> Admin Dashboard</h2>
+  </div>
+  <div class="admin-nav-links">
+    <a href="index.html" class="admin-nav-link"><i class="fas fa-home"></i> View Site</a>
+    <a href="#" class="admin-nav-link active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <button class="admin-logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </div>
+</nav>
+
+<div class="admin-container">
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <h3>Management</h3>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#cars" class="sidebar-link active" data-section="cars">
+        <i class="fas fa-car"></i> Cars Management
+      </a>
+      <a href="#rentals" class="sidebar-link" data-section="rentals">
+        <i class="fas fa-calendar-check"></i> Active Rentals
+      </a>
+      <a href="#bookings" class="sidebar-link" data-section="bookings">
+        <i class="fas fa-bookmark"></i> Bookings
+      </a>
+      <a href="#customers" class="sidebar-link" data-section="customers">
+        <i class="fas fa-users"></i> Customers
+      </a>
+      <a href="#reports" class="sidebar-link" data-section="reports">
+        <i class="fas fa-chart-bar"></i> Reports
+      </a>
+      <a href="#settings" class="sidebar-link" data-section="settings">
+        <i class="fas fa-cog"></i> Settings
+      </a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="admin-main">
+    <!-- DASHBOARD OVERVIEW -->
+    <section id="overview" class="dashboard-section active">
+      <div class="section-header">
+        <h1>Dashboard Overview</h1>
+        <p>Welcome back! Here's what's happening with your business.</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-car"></i>
+          </div>
+          <div class="stat-content">
+            <h3 id="total-cars">24</h3>
+            <p>Total Cars</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <div class="stat-content">
+            <h3 id="active-rentals">8</h3>
+            <p>Active Rentals</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-dollar-sign"></i>
+          </div>
+          <div class="stat-content">
+            <h3 id="monthly-revenue">$12,450</h3>
+            <p>Monthly Revenue</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="stat-content">
+            <h3 id="total-customers">156</h3>
+            <p>Total Customers</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECENT ACTIVITY -->
+      <div class="recent-activity">
+        <h2>Recent Activity</h2>
+        <div class="activity-list">
+          <div class="activity-item">
+            <div class="activity-icon">
+              <i class="fas fa-car"></i>
+            </div>
+            <div class="activity-content">
+              <p><strong>Toyota Camry</strong> rented by John Doe</p>
+              <span class="activity-time">2 hours ago</span>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">
+              <i class="fas fa-plus"></i>
+            </div>
+            <div class="activity-content">
+              <p>New car <strong>BMW X5</strong> added to fleet</p>
+              <span class="activity-time">1 day ago</span>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">
+              <i class="fas fa-check"></i>
+            </div>
+            <div class="activity-content">
+              <p>Rental completed for <strong>Honda Civic</strong></p>
+              <span class="activity-time">2 days ago</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARS MANAGEMENT -->
+    <section id="cars" class="dashboard-section">
+      <div class="section-header">
+        <h1>Cars Management</h1>
+        <button class="btn-primary" id="add-car-btn">
+          <i class="fas fa-plus"></i> Add New Car
+        </button>
+      </div>
+
+      <div class="filters">
+        <div class="filter-group">
+          <label>Status:</label>
+          <select id="car-status-filter">
+            <option value="all">All Cars</option>
+            <option value="available">Available</option>
+            <option value="rented">Rented</option>
+            <option value="maintenance">Maintenance</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Type:</label>
+          <select id="car-type-filter">
+            <option value="all">All Types</option>
+            <option value="sedan">Sedan</option>
+            <option value="suv">SUV</option>
+            <option value="luxury">Luxury</option>
+            <option value="van">Van</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="cars-grid" id="cars-grid">
+        <!-- Cars will be loaded here -->
+      </div>
+    </section>
+
+    <!-- ACTIVE RENTALS -->
+    <section id="rentals" class="dashboard-section">
+      <div class="section-header">
+        <h1>Active Rentals</h1>
+        <p>Manage current car rentals and returns</p>
+      </div>
+
+      <div class="rentals-table-container">
+        <table class="rentals-table">
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Car</th>
+              <th>Pickup Date</th>
+              <th>Return Date</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="rentals-tbody">
+            <!-- Rental data will be loaded here -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- BOOKINGS -->
+    <section id="bookings" class="dashboard-section">
+      <div class="section-header">
+        <h1>Bookings</h1>
+        <p>Manage upcoming bookings and reservations</p>
+      </div>
+
+      <div class="bookings-list" id="bookings-list">
+        <!-- Bookings will be loaded here -->
+      </div>
+    </section>
+
+    <!-- CUSTOMERS -->
+    <section id="customers" class="dashboard-section">
+      <div class="section-header">
+        <h1>Customers</h1>
+        <p>View and manage customer information</p>
+      </div>
+
+      <div class="customers-table-container">
+        <table class="customers-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Total Rentals</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="customers-tbody">
+            <!-- Customer data will be loaded here -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- REPORTS -->
+    <section id="reports" class="dashboard-section">
+      <div class="section-header">
+        <h1>Reports</h1>
+        <p>View business analytics and reports</p>
+      </div>
+
+      <div class="reports-grid">
+        <div class="report-card">
+          <h3>Revenue Report</h3>
+          <div class="report-chart">
+            <canvas id="revenue-chart"></canvas>
+          </div>
+        </div>
+        <div class="report-card">
+          <h3>Car Utilization</h3>
+          <div class="report-chart">
+            <canvas id="utilization-chart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="settings" class="dashboard-section">
+      <div class="section-header">
+        <h1>Settings</h1>
+        <p>Configure your website settings</p>
+      </div>
+
+      <div class="settings-form">
+        <div class="setting-group">
+          <h3>General Settings</h3>
+          <div class="form-group">
+            <label for="site-title">Site Title</label>
+            <input type="text" id="site-title" value="Mukasa Transport Service">
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Contact Email</label>
+            <input type="email" id="contact-email" value="info@mukasatransport.com">
+          </div>
+          <div class="form-group">
+            <label for="contact-phone">Contact Phone</label>
+            <input type="tel" id="contact-phone" value="+250 123 456 789">
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <h3>Pricing Settings</h3>
+          <div class="form-group">
+            <label for="base-rate">Base Daily Rate ($)</label>
+            <input type="number" id="base-rate" value="50">
+          </div>
+          <div class="form-group">
+            <label for="luxury-multiplier">Luxury Car Multiplier</label>
+            <input type="number" id="luxury-multiplier" value="2.5" step="0.1">
+          </div>
+        </div>
+
+        <button class="btn-primary">Save Settings</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- MODALS -->
+<!-- Add Car Modal -->
+<div id="add-car-modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Add New Car</h2>
+      <span class="modal-close">&times;</span>
+    </div>
+    <form id="add-car-form" class="modal-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="car-make">Make</label>
+          <input type="text" id="car-make" required>
+        </div>
+        <div class="form-group">
+          <label for="car-model">Model</label>
+          <input type="text" id="car-model" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="car-year">Year</label>
+          <input type="number" id="car-year" required>
+        </div>
+        <div class="form-group">
+          <label for="car-type">Type</label>
+          <select id="car-type" required>
+            <option value="sedan">Sedan</option>
+            <option value="suv">SUV</option>
+            <option value="luxury">Luxury</option>
+            <option value="van">Van</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="car-price">Daily Price ($)</label>
+        <input type="number" id="car-price" step="0.01" required>
+      </div>
+      <div class="form-group">
+        <label for="car-image">Image URL</label>
+        <input type="url" id="car-image" required>
+      </div>
+      <div class="form-group">
+        <label for="car-description">Description</label>
+        <textarea id="car-description" rows="3"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+        <button type="submit" class="btn-primary">Add Car</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="dashboard.js"></script>
+
+</body>
+</html>

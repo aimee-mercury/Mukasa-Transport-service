@@ -3,111 +3,412 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MTS Rwanda</title>
-
+  <title>Mukasa Transport Service - Premium Car Rental Rwanda</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar">
   <a href="index.html" class="logo-box">
     <div class="logo-circle">MTS</div>
-    <h2>Mukasa Transport Service</h2>
+    <div class="logo-text">
+      <h2>Mukasa Transport</h2>
+      <p>Premium Car Rentals</p>
+    </div>
   </a>
 
   <ul class="nav-links">
-    <li><a href="#">Home</a></li>
-    <li><a href="#cars">Cars</a></li>
-    <li><a href="#services">Services</a></li>
+    <li><a href="index.html" class="nav-link">Home</a></li>
+    <li><a href="index.html#cars" class="nav-link">Cars</a></li>
+    <li><a href="index.html#services" class="nav-link">Services</a></li>
+    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
   </ul>
+
+  <div class="mobile-menu-btn">
+    <i class="fas fa-bars"></i>
+  </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
+<!-- HERO SECTION -->
+<section class="hero" id="home">
   <div class="overlay"></div>
-
+  
   <div class="hero-content">
-    <h1>Luxury Car Rental In Rwanda</h1>
-    <p>Rent premium manual and automatic cars with or without driver.</p>
-    <a href="#cars" class="hero-btn">Explore Cars</a>
+    <h1 class="hero-title">Luxury Car Rentals in Rwanda</h1>
+    <p class="hero-subtitle">Affordable Premium Cars with or Without Driver</p>
+    
+    <div class="hero-search">
+      <div class="search-group">
+        <label>Pick-up Date</label>
+        <input type="date" id="pickupDate" required>
+      </div>
+      <div class="search-group">
+        <label>Return Date</label>
+        <input type="date" id="returnDate" required>
+      </div>
+      <button class="search-btn" onclick="searchCars()">
+        <i class="fas fa-search"></i> Search Cars
+      </button>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <h3>500+</h3>
+        <p>Happy Customers</p>
+      </div>
+      <div class="stat">
+        <h3>50+</h3>
+        <p>Premium Cars</p>
+      </div>
+      <div class="stat">
+        <h3>24/7</h3>
+        <p>Support</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- CARS -->
-<section class="cars-section" id="cars">
-  <h2 class="section-title">Available Cars</h2>
-  <div class="cars-container" id="cars-container"></div>
+<!-- DASHBOARD SECTION -->
+<section class="dashboard" id="dashboard">
+  <div class="container">
+    <h2 class="section-title">Quick Dashboard</h2>
+    
+    <div class="dashboard-grid">
+      <div class="dashboard-card">
+        <div class="card-icon">
+          <i class="fas fa-car"></i>
+        </div>
+        <h3>Available Cars</h3>
+        <p class="card-number" id="carCount">50</p>
+        <p class="card-description">Ready to rent</p>
+      </div>
+
+      <div class="dashboard-card">
+        <div class="card-icon">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <h3>Coverage Area</h3>
+        <p class="card-number">All Rwanda</p>
+        <p class="card-description">Nationwide delivery</p>
+      </div>
+
+      <div class="dashboard-card">
+        <div class="card-icon">
+          <i class="fas fa-user-tie"></i>
+        </div>
+        <h3>Professional Drivers</h3>
+        <p class="card-number">30+</p>
+        <p class="card-description">Experienced & licensed</p>
+      </div>
+
+      <div class="dashboard-card">
+        <div class="card-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3>Insurance Covered</h3>
+        <p class="card-number">100%</p>
+        <p class="card-description">Peace of mind</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- SERVICES -->
+<!-- CARS SECTION -->
+<section class="cars-section" id="cars">
+  <div class="container">
+    <h2 class="section-title">Our Premium Fleet</h2>
+    <p class="section-subtitle">Choose from our selection of luxury and affordable vehicles</p>
+    
+    <div class="filter-controls">
+      <button class="filter-btn active" data-filter="all">All Cars</button>
+      <button class="filter-btn" data-filter="budget">Budget</button>
+      <button class="filter-btn" data-filter="premium">Premium</button>
+      <button class="filter-btn" data-filter="suv">SUV</button>
+    </div>
+
+    <div class="cars-container" id="cars-container"></div>
+  </div>
+</section>
+
+<!-- SERVICES SECTION -->
 <section class="services" id="services">
-  <h2 class="section-title">Our Services</h2>
+  <div class="container">
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-subtitle">Comprehensive transportation solutions tailored for you</p>
 
-  <div class="services-grid">
-    <div class="service-card">
-      <i class="fa-solid fa-car"></i>
-      <h3>Self Drive</h3>
-      <p>Affordable car rentals without driver.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-car"></i>
+        </div>
+        <h3>Self Drive</h3>
+        <p>Affordable car rentals without driver. Perfect for independent travelers who want complete control.</p>
+        <a href="#cars" class="service-link">Learn More →</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <h3>Driver Included</h3>
+        <p>Professional drivers available 24/7. Sit back and relax while our experienced drivers take you.</p>
+        <a href="#cars" class="service-link">Learn More →</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-plane"></i>
+        </div>
+        <h3>Airport Pickup</h3>
+        <p>Reliable airport transportation service. We'll be waiting with a sign at your arrival terminal.</p>
+        <a href="#cars" class="service-link">Learn More →</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-building"></i>
+        </div>
+        <h3>Corporate Events</h3>
+        <p>Special rates for corporate bookings, team outings, and business transportation needs.</p>
+        <a href="#cars" class="service-link">Learn More →</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-heart"></i>
+        </div>
+        <h3>Wedding Services</h3>
+        <p>Premium vehicles for weddings, anniversaries, and special celebrations with professional service.</p>
+        <a href="#cars" class="service-link">Learn More →</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-tag"></i>
+        </div>
+        <h3>Discount Packages</h3>
+        <p>Weekly and monthly rental packages with attractive discounts for long-term bookings.</p>
+        <a href="#cars" class="service-link">Learn More →</a>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="service-card">
-      <i class="fa-solid fa-user"></i>
-      <h3>Driver Included</h3>
-      <p>Professional drivers available 24/7.</p>
+<!-- PRICING SECTION -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <h2 class="section-title">Pricing Plans</h2>
+    <p class="section-subtitle">Transparent pricing with no hidden charges</p>
+
+    <div class="pricing-grid">
+      <div class="pricing-card budget-plan">
+        <h3>Budget</h3>
+        <p class="price-range">$70 - $120/day</p>
+        <ul class="pricing-features">
+          <li><i class="fas fa-check"></i> Small & Compact Cars</li>
+          <li><i class="fas fa-check"></i> Manual Transmission</li>
+          <li><i class="fas fa-check"></i> Basic Insurance</li>
+          <li><i class="fas fa-check"></i> Free Delivery</li>
+          <li><i class="fas fa-times"></i> Driver Service</li>
+        </ul>
+        <button class="price-btn">Choose Plan</button>
+      </div>
+
+      <div class="pricing-card standard-plan">
+        <div class="popular-badge">POPULAR</div>
+        <h3>Standard</h3>
+        <p class="price-range">$130 - $200/day</p>
+        <ul class="pricing-features">
+          <li><i class="fas fa-check"></i> Sedans & Compact SUVs</li>
+          <li><i class="fas fa-check"></i> Automatic Transmission</li>
+          <li><i class="fas fa-check"></i> Full Insurance</li>
+          <li><i class="fas fa-check"></i> Free Delivery & Pick-up</li>
+          <li><i class="fas fa-check"></i> Driver Service Available</li>
+        </ul>
+        <button class="price-btn">Choose Plan</button>
+      </div>
+
+      <div class="pricing-card premium-plan">
+        <h3>Premium</h3>
+        <p class="price-range">$250 - $370/day</p>
+        <ul class="pricing-features">
+          <li><i class="fas fa-check"></i> Luxury SUVs & 4x4s</li>
+          <li><i class="fas fa-check"></i> Automatic Transmission</li>
+          <li><i class="fas fa-check"></i> Premium Insurance</li>
+          <li><i class="fas fa-check"></i> Dedicated Driver</li>
+          <li><i class="fas fa-check"></i> VIP Support 24/7</li>
+        </ul>
+        <button class="price-btn">Choose Plan</button>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="service-card">
-      <i class="fa-solid fa-plane"></i>
-      <h3>Airport Pickup</h3>
-      <p>Reliable airport transportation service.</p>
+<!-- TESTIMONIALS SECTION -->
+<section class="testimonials">
+  <div class="container">
+    <h2 class="section-title">What Our Customers Say</h2>
+    
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p>"Excellent service! The car was clean, the driver was professional, and the prices were fair. Highly recommended!"</p>
+        <div class="testimonial-author">
+          <div class="author-info">
+            <h4>John Doe</h4>
+            <p>Business Traveler</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p>"Perfect for our family vacation! The SUV was spacious and comfortable. Will definitely use again."</p>
+        <div class="testimonial-author">
+          <div class="author-info">
+            <h4>Sarah Johnson</h4>
+            <p>Family Vacation</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p>"Amazing experience from booking to return. The team is friendly and responsive. Best car rental in Rwanda!"</p>
+        <div class="testimonial-author">
+          <div class="author-info">
+            <h4>Michael Smith</h4>
+            <p>Tourist</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to Start Your Journey?</h2>
+    <p>Book your perfect car today and experience premium transportation</p>
+    <a href="#cars" class="cta-btn">Explore Our Fleet</a>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="contact" id="contact">
+  <div class="container">
+    <h2 class="section-title">Get in Touch</h2>
+    <p class="section-subtitle">We're here to help you 24/7</p>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-icon">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <h3>Location</h3>
+        <p>Kigali, Rwanda</p>
+      </div>
+
+      <div class="contact-info">
+        <div class="contact-icon">
+          <i class="fas fa-phone"></i>
+        </div>
+        <h3>Phone</h3>
+        <p><a href="tel:+250791758953">+250 791 758 953</a></p>
+      </div>
+
+      <div class="contact-info">
+        <div class="contact-icon">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <h3>Email</h3>
+        <p><a href="mailto:mtsrwanda@gmail.com">mtsrwanda@gmail.com</a></p>
+      </div>
+
+      <div class="contact-info">
+        <div class="contact-icon">
+          <i class="fas fa-clock"></i>
+        </div>
+        <h3>Hours</h3>
+        <p>24/7 Available</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer class="footer">
-  <div class="footer-container">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-box">
+        <h2>MTS Rwanda</h2>
+        <p>Premium & Affordable Car Rentals in Kigali and across Rwanda. Your trusted partner for quality transportation.</p>
+        <div class="footer-socials">
+          <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" title="Twitter"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
 
-    <div class="footer-box">
-      <h2>MTS Rwanda</h2>
-      <p>Luxury & Affordable Car Rentals in Kigali and across Rwanda.</p>
-    </div>
+      <div class="footer-box">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#cars">Available Cars</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
 
-    <div class="footer-box">
-      <h3>Contact</h3>
-      <p>📍 Kigali - Rwanda</p>
-      <p>📞 0791758953</p>
-      <p>📧 mtsrwanda@gmail.com</p>
-    </div>
+      <div class="footer-box">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="#">Self Drive</a></li>
+          <li><a href="#">With Driver</a></li>
+          <li><a href="#">Airport Pickup</a></li>
+          <li><a href="#">Corporate Events</a></li>
+          <li><a href="#">Wedding Services</a></li>
+        </ul>
+      </div>
 
-    <div class="footer-box">
-      <h3>Quick Links</h3>
-      <a href="#">Home</a>
-      <a href="#cars">Cars</a>
-      <a href="#services">Services</a>
-    </div>
-
-    <div class="footer-box">
-      <h3>Follow Us</h3>
-      <div class="socials">
-        <i class="fa-brands fa-facebook"></i>
-        <i class="fa-brands fa-instagram"></i>
-        <i class="fa-brands fa-whatsapp"></i>
-        <i class="fa-brands fa-x-twitter"></i>
+      <div class="footer-box">
+        <h3>Contact Info</h3>
+        <p><strong>Phone:</strong> +250 791 758 953</p>
+        <p><strong>Email:</strong> mtsrwanda@gmail.com</p>
+        <p><strong>Address:</strong> Kigali, Rwanda</p>
       </div>
     </div>
 
-  </div>
-
-  <div class="footer-bottom">
-    <p>© 2026 MTS Rwanda. All Rights Reserved.</p>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Mukasa Transport Service. All rights reserved.</p>
+      <p>Designed with <i class="fas fa-heart"></i> for Your Travel Comfort</p>
+    </div>
   </div>
 </footer>
 
 <script src="script.js"></script>
 </body>
-</html>
+</html>  
