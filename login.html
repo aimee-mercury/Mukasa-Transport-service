@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login - Mukasa Transport Service</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="login-container">
+      <div class="login-card">
+        <h1>Admin Login</h1>
+        <p>Sign in to manage vehicles, bookings, customers, and images.</p>
+
+        <form id="loginForm" class="login-form">
+          <div class="form-group">
+            <label for="adminEmail">Email address</label>
+            <input
+              type="email"
+              id="adminEmail"
+              placeholder="admin@mukasatransport.com"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="adminPassword">Password</label>
+            <input
+              type="password"
+              id="adminPassword"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          <div class="error-message" id="loginError">
+            Invalid email or password.
+          </div>
+
+          <button type="submit" class="login-btn">
+            <i class="fas fa-sign-in-alt"></i> Sign in
+          </button>
+
+          <p class="login-note">
+            Use <strong>admin@mukasatransport.com</strong> and password
+            <strong>Mukasa2026</strong>.
+          </p>
+          <p class="login-note">
+            <a href="index.html" class="login-link">Return to site</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const LOGIN_EMAIL = 'admin@mukasatransport.com'
+      const LOGIN_PASSWORD = 'Mukasa2026'
+      const AUTH_KEY = 'mts_logged_in'
+
+      const loginForm = document.getElementById('loginForm')
+      const loginError = document.getElementById('loginError')
+
+      if (localStorage.getItem(AUTH_KEY) === 'true') {
+        window.location.href = 'dashboard.html'
+      }
+
+      loginForm.addEventListener('submit', function (event) {
+        event.preventDefault()
+
+        const email = document.getElementById('adminEmail').value.trim()
+        const password = document.getElementById('adminPassword').value.trim()
+
+        if (email === LOGIN_EMAIL && password === LOGIN_PASSWORD) {
+          localStorage.setItem(AUTH_KEY, 'true')
+          window.location.href = 'dashboard.html'
+          return
+        }
+
+        loginError.style.display = 'block'
+      })
+    </script>
+  </body>
+</html>

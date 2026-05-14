@@ -10,8 +10,9 @@ const sampleCars = [
     type: 'sedan',
     price: 45,
     status: 'available',
-    image: 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?q=80&w=400&auto=format&fit=crop',
-    description: 'Comfortable and reliable sedan perfect for city driving.'
+    image:
+      'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?q=80&w=400&auto=format&fit=crop',
+    description: 'Comfortable and reliable sedan perfect for city driving.',
   },
   {
     id: 2,
@@ -21,8 +22,9 @@ const sampleCars = [
     type: 'suv',
     price: 120,
     status: 'rented',
-    image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=400&auto=format&fit=crop',
-    description: 'Luxury SUV with premium features and excellent performance.'
+    image:
+      'https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=400&auto=format&fit=crop',
+    description: 'Luxury SUV with premium features and excellent performance.',
   },
   {
     id: 3,
@@ -32,10 +34,11 @@ const sampleCars = [
     type: 'sedan',
     price: 35,
     status: 'available',
-    image: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?q=80&w=400&auto=format&fit=crop',
-    description: 'Fuel-efficient compact car ideal for daily commuting.'
-  }
-];
+    image:
+      'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?q=80&w=400&auto=format&fit=crop',
+    description: 'Fuel-efficient compact car ideal for daily commuting.',
+  },
+]
 
 const sampleRentals = [
   {
@@ -44,7 +47,7 @@ const sampleRentals = [
     car: 'Toyota Camry',
     pickupDate: '2024-01-15',
     returnDate: '2024-01-20',
-    status: 'active'
+    status: 'active',
   },
   {
     id: 2,
@@ -52,9 +55,9 @@ const sampleRentals = [
     car: 'BMW X5',
     pickupDate: '2024-01-10',
     returnDate: '2024-01-18',
-    status: 'active'
-  }
-];
+    status: 'active',
+  },
+]
 
 const sampleCustomers = [
   {
@@ -63,7 +66,7 @@ const sampleCustomers = [
     email: 'john@example.com',
     phone: '+250 123 456 789',
     totalRentals: 5,
-    status: 'active'
+    status: 'active',
   },
   {
     id: 2,
@@ -71,76 +74,93 @@ const sampleCustomers = [
     email: 'jane@example.com',
     phone: '+250 987 654 321',
     totalRentals: 3,
-    status: 'active'
-  }
-];
+    status: 'active',
+  },
+]
+
+const AUTH_KEY = 'mts_logged_in'
+const heroImageInput = document.getElementById('hero-image-input')
+const aboutImageInput = document.getElementById('about-image-input')
+const removeHeroButton = document.getElementById('remove-hero-image')
+const removeAboutButton = document.getElementById('remove-about-image')
+const heroPreview = document.getElementById('hero-preview')
+const aboutPreview = document.getElementById('about-preview')
+const saveSettingsBtn = document.getElementById('save-settings-btn')
+const siteTitleInput = document.getElementById('site-title')
+const contactEmailInput = document.getElementById('contact-email')
+const contactPhoneInput = document.getElementById('contact-phone')
+const baseRateInput = document.getElementById('base-rate')
+const luxuryMultiplierInput = document.getElementById('luxury-multiplier')
 
 // DOM Elements
-const sidebarLinks = document.querySelectorAll('.sidebar-link');
-const dashboardSections = document.querySelectorAll('.dashboard-section');
-const addCarBtn = document.getElementById('add-car-btn');
-const addCarModal = document.getElementById('add-car-modal');
-const modalClose = document.querySelector('.modal-close');
-const addCarForm = document.getElementById('add-car-form');
+const sidebarLinks = document.querySelectorAll('.sidebar-link')
+const dashboardSections = document.querySelectorAll('.dashboard-section')
+const addCarBtn = document.getElementById('add-car-btn')
+const addCarModal = document.getElementById('add-car-modal')
+const modalClose = document.querySelector('.modal-close')
+const addCarForm = document.getElementById('add-car-form')
 
 // Initialize dashboard
-document.addEventListener('DOMContentLoaded', function() {
-  initializeSidebar();
-  loadDashboardData();
-  initializeCharts();
-  setupEventListeners();
-});
+document.addEventListener('DOMContentLoaded', function () {
+  checkAuthentication()
+  initializeSidebar()
+  loadDashboardData()
+  loadDashboardSettings()
+  loadSavedWebsiteImages()
+  initializeCharts()
+  setupEventListeners()
+})
 
 // Sidebar navigation
 function initializeSidebar() {
-  sidebarLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
+  sidebarLinks.forEach((link) => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault()
 
       // Remove active class from all links
-      sidebarLinks.forEach(l => l.classList.remove('active'));
+      sidebarLinks.forEach((l) => l.classList.remove('active'))
 
       // Add active class to clicked link
-      this.classList.add('active');
+      this.classList.add('active')
 
       // Hide all sections
-      dashboardSections.forEach(section => {
-        section.classList.remove('active');
-      });
+      dashboardSections.forEach((section) => {
+        section.classList.remove('active')
+      })
 
       // Show selected section
-      const targetSection = document.getElementById(this.dataset.section);
+      const targetSection = document.getElementById(this.dataset.section)
       if (targetSection) {
-        targetSection.classList.add('active');
+        targetSection.classList.add('active')
       }
-    });
-  });
+    })
+  })
 }
 
 // Load dashboard data
 function loadDashboardData() {
-  loadCars();
-  loadRentals();
-  loadCustomers();
-  loadBookings();
-  updateStats();
+  loadCars()
+  loadRentals()
+  loadCustomers()
+  loadBookings()
+  updateStats()
 }
 
 // Load cars
 function loadCars() {
-  const carsGrid = document.getElementById('cars-grid');
-  carsGrid.innerHTML = '';
+  const carsGrid = document.getElementById('cars-grid')
+  carsGrid.innerHTML = ''
 
-  sampleCars.forEach(car => {
-    const carCard = createCarCard(car);
-    carsGrid.appendChild(carCard);
-  });
+  sampleCars.forEach((car) => {
+    const carCard = createCarCard(car)
+    carsGrid.appendChild(carCard)
+  })
 }
 
 // Create car card
 function createCarCard(car) {
-  const card = document.createElement('div');
-  card.className = 'car-card';
+  const card = document.createElement('div')
+  card.className = 'car-card'
 
   card.innerHTML = `
     <img src="${car.image}" alt="${car.make} ${car.model}" class="car-image">
@@ -160,18 +180,18 @@ function createCarCard(car) {
         </button>
       </div>
     </div>
-  `;
+  `
 
-  return card;
+  return card
 }
 
 // Load rentals
 function loadRentals() {
-  const rentalsTbody = document.getElementById('rentals-tbody');
-  rentalsTbody.innerHTML = '';
+  const rentalsTbody = document.getElementById('rentals-tbody')
+  rentalsTbody.innerHTML = ''
 
-  sampleRentals.forEach(rental => {
-    const row = document.createElement('tr');
+  sampleRentals.forEach((rental) => {
+    const row = document.createElement('tr')
 
     row.innerHTML = `
       <td>${rental.customer}</td>
@@ -187,19 +207,19 @@ function loadRentals() {
           <i class="fas fa-undo"></i> Return
         </button>
       </td>
-    `;
+    `
 
-    rentalsTbody.appendChild(row);
-  });
+    rentalsTbody.appendChild(row)
+  })
 }
 
 // Load customers
 function loadCustomers() {
-  const customersTbody = document.getElementById('customers-tbody');
-  customersTbody.innerHTML = '';
+  const customersTbody = document.getElementById('customers-tbody')
+  customersTbody.innerHTML = ''
 
-  sampleCustomers.forEach(customer => {
-    const row = document.createElement('tr');
+  sampleCustomers.forEach((customer) => {
+    const row = document.createElement('tr')
 
     row.innerHTML = `
       <td>${customer.name}</td>
@@ -215,16 +235,16 @@ function loadCustomers() {
           <i class="fas fa-ban"></i> Block
         </button>
       </td>
-    `;
+    `
 
-    customersTbody.appendChild(row);
-  });
+    customersTbody.appendChild(row)
+  })
 }
 
 // Load bookings
 function loadBookings() {
-  const bookingsList = document.getElementById('bookings-list');
-  bookingsList.innerHTML = '';
+  const bookingsList = document.getElementById('bookings-list')
+  bookingsList.innerHTML = ''
 
   // Sample bookings data
   const bookings = [
@@ -234,7 +254,7 @@ function loadBookings() {
       car: 'Honda Civic',
       pickupDate: '2024-01-25',
       returnDate: '2024-01-30',
-      status: 'pending'
+      status: 'pending',
     },
     {
       id: 2,
@@ -242,13 +262,13 @@ function loadBookings() {
       car: 'Toyota Camry',
       pickupDate: '2024-01-28',
       returnDate: '2024-02-02',
-      status: 'confirmed'
-    }
-  ];
+      status: 'confirmed',
+    },
+  ]
 
-  bookings.forEach(booking => {
-    const bookingCard = document.createElement('div');
-    bookingCard.className = 'booking-card';
+  bookings.forEach((booking) => {
+    const bookingCard = document.createElement('div')
+    bookingCard.className = 'booking-card'
 
     bookingCard.innerHTML = `
       <div class="booking-header">
@@ -269,90 +289,99 @@ function loadBookings() {
           <i class="fas fa-times"></i> Cancel
         </button>
       </div>
-    `;
+    `
 
-    bookingsList.appendChild(bookingCard);
-  });
+    bookingsList.appendChild(bookingCard)
+  })
 }
 
 // Update dashboard stats
 function updateStats() {
-  document.getElementById('total-cars').textContent = sampleCars.length;
-  document.getElementById('active-rentals').textContent = sampleRentals.length;
-  document.getElementById('total-customers').textContent = sampleCustomers.length;
+  document.getElementById('total-cars').textContent = sampleCars.length
+  document.getElementById('active-rentals').textContent = sampleRentals.length
+  document.getElementById('total-customers').textContent =
+    sampleCustomers.length
   // Monthly revenue calculation (simplified)
   const monthlyRevenue = sampleRentals.reduce((total, rental) => {
-    const car = sampleCars.find(c => c.make + ' ' + c.model === rental.car);
-    const days = Math.ceil((new Date(rental.returnDate) - new Date(rental.pickupDate)) / (1000 * 60 * 60 * 24));
-    return total + (car ? car.price * days : 0);
-  }, 0);
-  document.getElementById('monthly-revenue').textContent = `$${monthlyRevenue.toLocaleString()}`;
+    const car = sampleCars.find((c) => c.make + ' ' + c.model === rental.car)
+    const days = Math.ceil(
+      (new Date(rental.returnDate) - new Date(rental.pickupDate)) /
+        (1000 * 60 * 60 * 24),
+    )
+    return total + (car ? car.price * days : 0)
+  }, 0)
+  document.getElementById('monthly-revenue').textContent =
+    `$${monthlyRevenue.toLocaleString()}`
 }
 
 // Initialize charts
 function initializeCharts() {
   // Revenue Chart
-  const revenueCtx = document.getElementById('revenue-chart');
+  const revenueCtx = document.getElementById('revenue-chart')
   if (revenueCtx) {
     new Chart(revenueCtx, {
       type: 'line',
       data: {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-        datasets: [{
-          label: 'Revenue ($)',
-          data: [8500, 9200, 10100, 12450, 11800, 13200],
-          borderColor: '#f59e0b',
-          backgroundColor: 'rgba(245, 158, 11, 0.1)',
-          tension: 0.4
-        }]
+        datasets: [
+          {
+            label: 'Revenue ($)',
+            data: [8500, 9200, 10100, 12450, 11800, 13200],
+            borderColor: '#f59e0b',
+            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+            tension: 0.4,
+          },
+        ],
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: false
-          }
+            display: false,
+          },
         },
         scales: {
           y: {
             beginAtZero: true,
             grid: {
-              color: 'rgba(255, 255, 255, 0.1)'
+              color: 'rgba(255, 255, 255, 0.1)',
             },
             ticks: {
-              color: 'var(--text-muted)'
-            }
+              color: 'var(--text-muted)',
+            },
           },
           x: {
             grid: {
-              color: 'rgba(255, 255, 255, 0.1)'
+              color: 'rgba(255, 255, 255, 0.1)',
             },
             ticks: {
-              color: 'var(--text-muted)'
-            }
-          }
-        }
-      }
-    });
+              color: 'var(--text-muted)',
+            },
+          },
+        },
+      },
+    })
   }
 
   // Utilization Chart
-  const utilizationCtx = document.getElementById('utilization-chart');
+  const utilizationCtx = document.getElementById('utilization-chart')
   if (utilizationCtx) {
     new Chart(utilizationCtx, {
       type: 'doughnut',
       data: {
         labels: ['Available', 'Rented', 'Maintenance'],
-        datasets: [{
-          data: [
-            sampleCars.filter(c => c.status === 'available').length,
-            sampleCars.filter(c => c.status === 'rented').length,
-            sampleCars.filter(c => c.status === 'maintenance').length
-          ],
-          backgroundColor: ['#10b981', '#f59e0b', '#dc2626'],
-          borderWidth: 0
-        }]
+        datasets: [
+          {
+            data: [
+              sampleCars.filter((c) => c.status === 'available').length,
+              sampleCars.filter((c) => c.status === 'rented').length,
+              sampleCars.filter((c) => c.status === 'maintenance').length,
+            ],
+            backgroundColor: ['#10b981', '#f59e0b', '#dc2626'],
+            borderWidth: 0,
+          },
+        ],
       },
       options: {
         responsive: true,
@@ -362,12 +391,12 @@ function initializeCharts() {
             position: 'bottom',
             labels: {
               color: 'var(--text-light)',
-              padding: 20
-            }
-          }
-        }
-      }
-    });
+              padding: 20,
+            },
+          },
+        },
+      },
+    })
   }
 }
 
@@ -376,41 +405,59 @@ function setupEventListeners() {
   // Add car modal
   if (addCarBtn) {
     addCarBtn.addEventListener('click', () => {
-      addCarModal.classList.add('show');
-    });
+      addCarModal.classList.add('show')
+    })
   }
 
   if (modalClose) {
-    modalClose.addEventListener('click', closeModal);
+    modalClose.addEventListener('click', closeModal)
   }
 
   // Close modal when clicking outside
   window.addEventListener('click', (e) => {
     if (e.target === addCarModal) {
-      closeModal();
+      closeModal()
     }
-  });
+  })
 
   // Add car form submission
   if (addCarForm) {
-    addCarForm.addEventListener('submit', handleAddCar);
+    addCarForm.addEventListener('submit', handleAddCar)
   }
 
   // Filters
-  document.getElementById('car-status-filter').addEventListener('change', filterCars);
-  document.getElementById('car-type-filter').addEventListener('change', filterCars);
+  document
+    .getElementById('car-status-filter')
+    .addEventListener('change', filterCars)
+  document
+    .getElementById('car-type-filter')
+    .addEventListener('change', filterCars)
+
+  heroImageInput?.addEventListener('change', (event) => {
+    handleImageUpload(event, 'mts_hero_image', heroPreview)
+  })
+  aboutImageInput?.addEventListener('change', (event) => {
+    handleImageUpload(event, 'mts_about_image', aboutPreview)
+  })
+  removeHeroButton?.addEventListener('click', () =>
+    removeImage('mts_hero_image', heroPreview),
+  )
+  removeAboutButton?.addEventListener('click', () =>
+    removeImage('mts_about_image', aboutPreview),
+  )
+  saveSettingsBtn?.addEventListener('click', saveDashboardSettings)
 }
 
 // Close modal
 function closeModal() {
-  addCarModal.classList.remove('show');
+  addCarModal.classList.remove('show')
 }
 
 // Handle add car form
 function handleAddCar(e) {
-  e.preventDefault();
+  e.preventDefault()
 
-  const formData = new FormData(e.target);
+  const formData = new FormData(e.target)
   const newCar = {
     id: sampleCars.length + 1,
     make: formData.get('car-make'),
@@ -420,132 +467,216 @@ function handleAddCar(e) {
     price: parseFloat(formData.get('car-price')),
     status: 'available',
     image: formData.get('car-image'),
-    description: formData.get('car-description')
-  };
+    description: formData.get('car-description'),
+  }
 
-  sampleCars.push(newCar);
-  loadCars();
-  updateStats();
-  initializeCharts(); // Reinitialize charts with new data
-  closeModal();
-  e.target.reset();
+  sampleCars.push(newCar)
+  loadCars()
+  updateStats()
+  initializeCharts() // Reinitialize charts with new data
+  closeModal()
+  e.target.reset()
 }
 
 // Filter cars
 function filterCars() {
-  const statusFilter = document.getElementById('car-status-filter').value;
-  const typeFilter = document.getElementById('car-type-filter').value;
+  const statusFilter = document.getElementById('car-status-filter').value
+  const typeFilter = document.getElementById('car-type-filter').value
 
-  const carsGrid = document.getElementById('cars-grid');
-  carsGrid.innerHTML = '';
+  const carsGrid = document.getElementById('cars-grid')
+  carsGrid.innerHTML = ''
 
-  const filteredCars = sampleCars.filter(car => {
-    const statusMatch = statusFilter === 'all' || car.status === statusFilter;
-    const typeMatch = typeFilter === 'all' || car.type === typeFilter;
-    return statusMatch && typeMatch;
-  });
+  const filteredCars = sampleCars.filter((car) => {
+    const statusMatch = statusFilter === 'all' || car.status === statusFilter
+    const typeMatch = typeFilter === 'all' || car.type === typeFilter
+    return statusMatch && typeMatch
+  })
 
-  filteredCars.forEach(car => {
-    const carCard = createCarCard(car);
-    carsGrid.appendChild(carCard);
-  });
+  filteredCars.forEach((car) => {
+    const carCard = createCarCard(car)
+    carsGrid.appendChild(carCard)
+  })
 }
 
 // Car management functions
 function editCar(carId) {
-  const car = sampleCars.find(c => c.id === carId);
+  const car = sampleCars.find((c) => c.id === carId)
   if (car) {
-    alert(`Edit car: ${car.make} ${car.model}`);
+    alert(`Edit car: ${car.make} ${car.model}`)
     // Implement edit functionality
   }
 }
 
 function deleteCar(carId) {
   if (confirm('Are you sure you want to delete this car?')) {
-    const index = sampleCars.findIndex(c => c.id === carId);
+    const index = sampleCars.findIndex((c) => c.id === carId)
     if (index > -1) {
-      sampleCars.splice(index, 1);
-      loadCars();
-      updateStats();
-      initializeCharts();
+      sampleCars.splice(index, 1)
+      loadCars()
+      updateStats()
+      initializeCharts()
     }
   }
 }
 
 // Rental management functions
 function editRental(rentalId) {
-  const rental = sampleRentals.find(r => r.id === rentalId);
+  const rental = sampleRentals.find((r) => r.id === rentalId)
   if (rental) {
-    alert(`Edit rental for: ${rental.customer}`);
+    alert(`Edit rental for: ${rental.customer}`)
     // Implement edit functionality
   }
 }
 
 function returnCar(rentalId) {
   if (confirm('Mark this rental as returned?')) {
-    const index = sampleRentals.findIndex(r => r.id === rentalId);
+    const index = sampleRentals.findIndex((r) => r.id === rentalId)
     if (index > -1) {
-      sampleRentals.splice(index, 1);
-      loadRentals();
-      updateStats();
+      sampleRentals.splice(index, 1)
+      loadRentals()
+      updateStats()
     }
   }
 }
 
 // Customer management functions
 function editCustomer(customerId) {
-  const customer = sampleCustomers.find(c => c.id === customerId);
+  const customer = sampleCustomers.find((c) => c.id === customerId)
   if (customer) {
-    alert(`Edit customer: ${customer.name}`);
+    alert(`Edit customer: ${customer.name}`)
     // Implement edit functionality
   }
 }
 
 function deleteCustomer(customerId) {
   if (confirm('Are you sure you want to block this customer?')) {
-    const index = sampleCustomers.findIndex(c => c.id === customerId);
+    const index = sampleCustomers.findIndex((c) => c.id === customerId)
     if (index > -1) {
-      sampleCustomers.splice(index, 1);
-      loadCustomers();
-      updateStats();
+      sampleCustomers.splice(index, 1)
+      loadCustomers()
+      updateStats()
     }
   }
 }
 
 // Booking management functions
 function editBooking(bookingId) {
-  alert(`Edit booking ID: ${bookingId}`);
+  alert(`Edit booking ID: ${bookingId}`)
   // Implement edit functionality
 }
 
 function confirmBooking(bookingId) {
-  alert(`Booking ${bookingId} confirmed!`);
+  alert(`Booking ${bookingId} confirmed!`)
   // Implement confirm functionality
-  loadBookings();
+  loadBookings()
 }
 
 function cancelBooking(bookingId) {
   if (confirm('Are you sure you want to cancel this booking?')) {
-    alert(`Booking ${bookingId} cancelled.`);
-    // Implement cancel functionality
-    loadBookings();
+    alert(`Booking ${bookingId} cancelled.`)
+    loadBookings()
   }
+}
+
+function checkAuthentication() {
+  const isAuthenticated = localStorage.getItem(AUTH_KEY) === 'true'
+  if (!isAuthenticated) {
+    window.location.href = 'login.html'
+  }
+}
+
+function loadDashboardSettings() {
+  if (siteTitleInput) {
+    siteTitleInput.value =
+      localStorage.getItem('mts_site_title') || siteTitleInput.value
+  }
+  if (contactEmailInput) {
+    contactEmailInput.value =
+      localStorage.getItem('mts_contact_email') || contactEmailInput.value
+  }
+  if (contactPhoneInput) {
+    contactPhoneInput.value =
+      localStorage.getItem('mts_contact_phone') || contactPhoneInput.value
+  }
+  if (baseRateInput) {
+    baseRateInput.value =
+      localStorage.getItem('mts_base_rate') || baseRateInput.value
+  }
+  if (luxuryMultiplierInput) {
+    luxuryMultiplierInput.value =
+      localStorage.getItem('mts_luxury_multiplier') ||
+      luxuryMultiplierInput.value
+  }
+}
+
+function loadSavedWebsiteImages() {
+  if (heroPreview) {
+    const heroImage = localStorage.getItem('mts_hero_image')
+    heroPreview.innerHTML = heroImage
+      ? `<img src="${heroImage}" alt="Hero preview">`
+      : 'No image selected'
+  }
+  if (aboutPreview) {
+    const aboutImage = localStorage.getItem('mts_about_image')
+    aboutPreview.innerHTML = aboutImage
+      ? `<img src="${aboutImage}" alt="About preview">`
+      : 'No image selected'
+  }
+}
+
+function handleImageUpload(event, storageKey, previewElement) {
+  const file = event.target.files[0]
+  if (!file || !previewElement) return
+
+  const reader = new FileReader()
+  reader.onload = () => {
+    localStorage.setItem(storageKey, reader.result)
+    previewElement.innerHTML = `<img src="${reader.result}" alt="Preview">`
+  }
+  reader.readAsDataURL(file)
+}
+
+function removeImage(storageKey, previewElement) {
+  localStorage.removeItem(storageKey)
+  if (previewElement) {
+    previewElement.innerHTML = 'No image selected'
+  }
+}
+
+function saveDashboardSettings() {
+  if (siteTitleInput) {
+    localStorage.setItem('mts_site_title', siteTitleInput.value)
+  }
+  if (contactEmailInput) {
+    localStorage.setItem('mts_contact_email', contactEmailInput.value)
+  }
+  if (contactPhoneInput) {
+    localStorage.setItem('mts_contact_phone', contactPhoneInput.value)
+  }
+  if (baseRateInput) {
+    localStorage.setItem('mts_base_rate', baseRateInput.value)
+  }
+  if (luxuryMultiplierInput) {
+    localStorage.setItem('mts_luxury_multiplier', luxuryMultiplierInput.value)
+  }
+  alert('Settings saved.')
 }
 
 // Utility functions
 function formatDate(dateString) {
-  const date = new Date(dateString);
+  const date = new Date(dateString)
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
-    day: 'numeric'
-  });
+    day: 'numeric',
+  })
 }
 
 // Logout function
-document.querySelector('.admin-logout-btn').addEventListener('click', function() {
+const logoutButton = document.querySelector('.admin-logout-btn')
+logoutButton?.addEventListener('click', function () {
   if (confirm('Are you sure you want to logout?')) {
-    // In a real application, this would clear session/auth tokens
-    window.location.href = 'index.html';
+    localStorage.removeItem(AUTH_KEY)
+    window.location.href = 'login.html'
   }
-});
+})

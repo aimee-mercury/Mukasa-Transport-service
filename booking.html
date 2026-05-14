@@ -1,645 +1,687 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book Your Car - Mukasa Transport Service</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Your Car - Mukasa Transport Service</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
 
-<body>
-
-<!-- NAVBAR -->
-<nav class="navbar">
-  <a href="index.html" class="logo-box">
-    <div class="logo-circle">MTS</div>
-    <div class="logo-text">
-      <h2>Mukasa Transport</h2>
-      <p>Premium Car Rentals</p>
-    </div>
-  </a>
-
-  <ul class="nav-links">
-    <li><a href="index.html" class="nav-link">Home</a></li>
-    <li><a href="index.html#cars" class="nav-link">Cars</a></li>
-    <li><a href="index.html#services" class="nav-link">Services</a></li>
-    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-  </ul>
-
-  <div class="mobile-menu-btn">
-    <i class="fas fa-bars"></i>
-  </div>
-</nav>
-
-<!-- BOOKING PAGE -->
-<div class="booking-page">
-  <div class="booking-container">
-    <div class="booking-content">
-      <div class="booking-header">
-        <h1><i class="fas fa-car"></i> Book Your Car</h1>
-        <p>Complete the form below to secure your rental reservation</p>
-      </div>
-
-      <form class="booking-form" id="bookingForm">
-        
-        <!-- Name & Phone -->
-        <div class="form-row">
-          <div class="form-group">
-            <label for="name">Full Name</label>
-            <input 
-              type="text"
-              id="name"
-              placeholder="John Doe"
-              required>
-            <span class="form-icon"><i class="fas fa-user"></i></span>
+  <body>
+    <header class="site-header">
+      <div class="container header-wrapper">
+        <a
+          href="#home"
+          class="brand"
+          aria-label="Mukasa Transport Service home"
+        >
+          <img
+            src="logo.png"
+            alt="Mukasa Transport Service logo"
+            class="brand-logo"
+          />
+          <div class="brand-text">
+            <strong>Mukasa Transport Service</strong>
+            <span>Kigali, Rwanda</span>
           </div>
+        </a>
 
-          <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input 
-              type="tel"
-              id="phone"
-              placeholder="+250 791 758 953"
-              required>
-            <span class="form-icon"><i class="fas fa-phone"></i></span>
-          </div>
-        </div>
-
-        <!-- Email & Car Selection -->
-        <div class="form-row">
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input 
-              type="email"
-              id="email"
-              placeholder="your@email.com"
-              required>
-            <span class="form-icon"><i class="fas fa-envelope"></i></span>
-          </div>
-
-          <div class="form-group">
-            <label for="car">Selected Car</label>
-            <input 
-              type="text"
-              id="car"
-              placeholder="Select a car from our fleet"
-              readonly>
-            <span class="form-icon"><i class="fas fa-car"></i></span>
-          </div>
-        </div>
-
-        <!-- Dates & Duration -->
-        <div class="form-row">
-          <div class="form-group">
-            <label for="date">Pick-up Date</label>
-            <input 
-              type="date"
-              id="date"
-              required>
-            <span class="form-icon"><i class="fas fa-calendar"></i></span>
-          </div>
-
-          <div class="form-group">
-            <label for="returnDate">Return Date</label>
-            <input 
-              type="date"
-              id="returnDate"
-              required>
-            <span class="form-icon"><i class="fas fa-calendar"></i></span>
-          </div>
-        </div>
-
-        <!-- Service & Additional Options -->
-        <div class="form-row">
-          <div class="form-group">
-            <label for="service">Service Type</label>
-            <select id="service" required>
-              <option value="">-- Select Service --</option>
-              <option value="Without Driver">Self Drive</option>
-              <option value="With Driver">With Professional Driver</option>
-            </select>
-            <span class="form-icon"><i class="fas fa-list"></i></span>
-          </div>
-
-          <div class="form-group">
-            <label for="passengers">Number of Passengers</label>
-            <input 
-              type="number"
-              id="passengers"
-              min="1"
-              max="8"
-              placeholder="1"
-              value="1"
-              required>
-            <span class="form-icon"><i class="fas fa-users"></i></span>
-          </div>
-        </div>
-
-        <!-- Additional Details -->
-        <div class="form-group full-width">
-          <label for="message">Special Requests</label>
-          <textarea
-            id="message"
-            placeholder="Any special requirements or additional details? (e.g., GPS needed, child seat, etc.)">
-          </textarea>
-          <span class="form-icon"><i class="fas fa-comment"></i></span>
-        </div>
-
-        <!-- Cost Summary -->
-        <div class="cost-summary">
-          <div class="summary-row">
-            <span>Daily Rate:</span>
-            <span id="dailyRate" class="rate-value">$0</span>
-          </div>
-          <div class="summary-row">
-            <span>Number of Days:</span>
-            <span id="numDays" class="rate-value">0</span>
-          </div>
-          <div class="summary-row total">
-            <span>Total Estimated Cost:</span>
-            <span id="totalCost" class="rate-value">$0</span>
-          </div>
-        </div>
-
-        <!-- Terms & Submit -->
-        <div class="form-group checkbox">
-          <label>
-            <input type="checkbox" required>
-            I agree to the terms and conditions
-          </label>
-        </div>
-
-        <button type="submit" class="submit-btn">
-          <i class="fas fa-whatsapp"></i> Send Booking via WhatsApp
+        <button
+          class="mobile-menu-btn"
+          type="button"
+          aria-label="Open navigation"
+        >
+          <i class="fas fa-bars"></i>
         </button>
 
-        <div class="security-info">
-          <i class="fas fa-shield-alt"></i>
-          Your information is secure and will only be used for your booking.
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="#home" class="nav-link active">Home</a>
+          <a href="#vehicles" class="nav-link">Vehicles</a>
+          <a href="#services" class="nav-link">Services</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="booking.html" class="nav-link">Book</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+
+        <a href="tel:+250791758953" class="header-call">
+          <i class="fas fa-phone"></i>
+          <span>+250 791 758 953</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- BOOKING PAGE -->
+    <div class="booking-page">
+      <div class="booking-container">
+        <div class="booking-content">
+          <div class="booking-header">
+            <h1><i class="fas fa-car"></i> Book Your Car</h1>
+            <p>Complete the form below to secure your rental reservation</p>
+          </div>
+
+          <form class="booking-form" id="bookingForm">
+            <!-- Name & Phone -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="John Doe" required />
+                <span class="form-icon"><i class="fas fa-user"></i></span>
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  placeholder="+250 791 758 953"
+                  required
+                />
+                <span class="form-icon"><i class="fas fa-phone"></i></span>
+              </div>
+            </div>
+
+            <!-- Email & Car Selection -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="your@email.com"
+                  required
+                />
+                <span class="form-icon"><i class="fas fa-envelope"></i></span>
+              </div>
+
+              <div class="form-group">
+                <label for="car">Selected Car</label>
+                <select id="car" required>
+                  <option>Toyota Land Cruiser Prado</option>
+                  <option>Toyota Hiace</option>
+                  <option>Toyota Quantum</option>
+                  <option>Toyota Corolla</option>
+                  <option>Suzuki Swift</option>
+                  <option>Yamaha YBR 125</option>
+                </select>
+                <span class="form-icon"><i class="fas fa-car"></i></span>
+              </div>
+            </div>
+
+            <!-- Dates & Duration -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="date">Pick-up Date</label>
+                <input type="date" id="date" required />
+                <span class="form-icon"><i class="fas fa-calendar"></i></span>
+              </div>
+
+              <div class="form-group">
+                <label for="returnDate">Return Date</label>
+                <input type="date" id="returnDate" required />
+                <span class="form-icon"><i class="fas fa-calendar"></i></span>
+              </div>
+            </div>
+
+            <!-- Service & Additional Options -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="service">Service Type</label>
+                <select id="service" required>
+                  <option value="">-- Select Service --</option>
+                  <option value="Without Driver">Self Drive</option>
+                  <option value="With Driver">With Professional Driver</option>
+                </select>
+                <span class="form-icon"><i class="fas fa-list"></i></span>
+              </div>
+
+              <div class="form-group">
+                <label for="passengers">Number of Passengers</label>
+                <input
+                  type="number"
+                  id="passengers"
+                  min="1"
+                  max="8"
+                  placeholder="1"
+                  value="1"
+                  required
+                />
+                <span class="form-icon"><i class="fas fa-users"></i></span>
+              </div>
+            </div>
+
+            <!-- Additional Details -->
+            <div class="form-group full-width">
+              <label for="message">Special Requests</label>
+              <textarea
+                id="message"
+                placeholder="Any special requirements or additional details? (e.g., GPS needed, child seat, etc.)"
+              >
+              </textarea>
+              <span class="form-icon"><i class="fas fa-comment"></i></span>
+            </div>
+
+            <!-- Cost Summary -->
+            <div class="cost-summary">
+              <div class="summary-row">
+                <span>Daily Rate:</span>
+                <span id="dailyRate" class="rate-value">$0</span>
+              </div>
+              <div class="summary-row">
+                <span>Number of Days:</span>
+                <span id="numDays" class="rate-value">0</span>
+              </div>
+              <div class="summary-row total">
+                <span>Total Estimated Cost:</span>
+                <span id="totalCost" class="rate-value">$0</span>
+              </div>
+            </div>
+
+            <!-- Terms & Submit -->
+            <div class="form-group checkbox">
+              <label>
+                <input type="checkbox" required />
+                I agree to the terms and conditions
+              </label>
+            </div>
+
+            <button type="submit" class="submit-btn">
+              <i class="fas fa-whatsapp"></i> Send Booking via WhatsApp
+            </button>
+
+            <div class="security-info">
+              <i class="fas fa-shield-alt"></i>
+              Your information is secure and will only be used for your booking.
+            </div>
+          </form>
         </div>
 
-      </form>
+        <!-- Booking Info Section -->
+        <div class="booking-info">
+          <h3><i class="fas fa-info-circle"></i> Why Book With Us?</h3>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="info-text">
+              <h4>Best Prices</h4>
+              <p>Competitive rates with transparent pricing</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-car"></i>
+            </div>
+            <div class="info-text">
+              <h4>Premium Fleet</h4>
+              <p>Well-maintained luxury and affordable vehicles</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-headset"></i>
+            </div>
+            <div class="info-text">
+              <h4>24/7 Support</h4>
+              <p>Round-the-clock customer assistance</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="info-text">
+              <h4>Full Insurance</h4>
+              <p>Comprehensive coverage included</p>
+            </div>
+          </div>
+
+          <div class="booking-contact">
+            <h4>Need Help?</h4>
+            <p>
+              <strong>Call us:</strong>
+              <a href="tel:+250791758953">+250 791 758 953</a>
+            </p>
+            <p>
+              <strong>Email:</strong>
+              <a href="mailto:mtsrwanda@gmail.com">mtsrwanda@gmail.com</a>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Booking Info Section -->
-    <div class="booking-info">
-      <h3><i class="fas fa-info-circle"></i> Why Book With Us?</h3>
-      
-      <div class="info-item">
-        <div class="info-icon">
-          <i class="fas fa-check-circle"></i>
-        </div>
-        <div class="info-text">
-          <h4>Best Prices</h4>
-          <p>Competitive rates with transparent pricing</p>
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <p>&copy; 2024 Mukasa Transport Service. All rights reserved.</p>
         </div>
       </div>
+    </footer>
 
-      <div class="info-item">
-        <div class="info-icon">
-          <i class="fas fa-car"></i>
-        </div>
-        <div class="info-text">
-          <h4>Premium Fleet</h4>
-          <p>Well-maintained luxury and affordable vehicles</p>
-        </div>
-      </div>
+    <style>
+      .booking-page {
+        min-height: 100vh;
+        padding: 100px 20px 40px;
+        background: linear-gradient(
+          135deg,
+          rgba(30, 41, 59, 0.5) 0%,
+          rgba(15, 23, 42, 0.8) 100%
+        );
+      }
 
-      <div class="info-item">
-        <div class="info-icon">
-          <i class="fas fa-headset"></i>
-        </div>
-        <div class="info-text">
-          <h4>24/7 Support</h4>
-          <p>Round-the-clock customer assistance</p>
-        </div>
-      </div>
+      .booking-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 40px;
+      }
 
-      <div class="info-item">
-        <div class="info-icon">
-          <i class="fas fa-shield-alt"></i>
-        </div>
-        <div class="info-text">
-          <h4>Full Insurance</h4>
-          <p>Comprehensive coverage included</p>
-        </div>
-      </div>
+      .booking-content {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        padding: 40px;
+        border-radius: 15px;
+        border: 1px solid #1e293b;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
 
-      <div class="booking-contact">
-        <h4>Need Help?</h4>
-        <p><strong>Call us:</strong> <a href="tel:+250791758953">+250 791 758 953</a></p>
-        <p><strong>Email:</strong> <a href="mailto:mtsrwanda@gmail.com">mtsrwanda@gmail.com</a></p>
-      </div>
-    </div>
-  </div>
-</div>
+      .booking-header {
+        margin-bottom: 40px;
+        border-bottom: 2px solid #facc15;
+        padding-bottom: 20px;
+      }
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-bottom">
-      <p>&copy; 2024 Mukasa Transport Service. All rights reserved.</p>
-    </div>
-  </div>
-</footer>
+      .booking-header h1 {
+        font-size: 32px;
+        color: #facc15;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
 
-<style>
-.booking-page {
-  min-height: 100vh;
-  padding: 100px 20px 40px;
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.8) 100%);
-}
+      .booking-header p {
+        color: #94a3b8;
+        font-size: 15px;
+      }
 
-.booking-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 40px;
-}
+      .booking-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
 
-.booking-content {
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  padding: 40px;
-  border-radius: 15px;
-  border: 1px solid #1e293b;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
 
-.booking-header {
-  margin-bottom: 40px;
-  border-bottom: 2px solid #facc15;
-  padding-bottom: 20px;
-}
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
 
-.booking-header h1 {
-  font-size: 32px;
-  color: #facc15;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
+      .form-group.full-width {
+        grid-column: 1 / -1;
+      }
 
-.booking-header p {
-  color: #94a3b8;
-  font-size: 15px;
-}
+      .form-group label {
+        margin-bottom: 8px;
+        color: #e2e8f0;
+        font-weight: 600;
+        font-size: 14px;
+      }
 
-.booking-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        padding: 12px 40px 12px 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid #1e293b;
+        border-radius: 8px;
+        color: #e2e8f0;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
 
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
+      .form-group textarea {
+        resize: vertical;
+        min-height: 100px;
+        padding: 12px;
+      }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.1);
+        border-color: #facc15;
+        box-shadow: 0 0 20px rgba(250, 204, 21, 0.2);
+      }
 
-.form-group.full-width {
-  grid-column: 1 / -1;
-}
+      .form-icon {
+        position: absolute;
+        right: 12px;
+        top: 38px;
+        color: #facc15;
+        pointer-events: none;
+      }
 
-.form-group label {
-  margin-bottom: 8px;
-  color: #e2e8f0;
-  font-weight: 600;
-  font-size: 14px;
-}
+      .form-group.checkbox {
+        flex-direction: row;
+        align-items: center;
+        margin-top: 10px;
+      }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
-  padding: 12px 40px 12px 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid #1e293b;
-  border-radius: 8px;
-  color: #e2e8f0;
-  font-size: 14px;
-  transition: all 0.3s ease;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+      .form-group.checkbox label {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: normal;
+        cursor: pointer;
+      }
 
-.form-group textarea {
-  resize: vertical;
-  min-height: 100px;
-  padding: 12px;
-}
+      .form-group.checkbox input {
+        width: auto;
+        padding: 0;
+        background: none;
+        border: 1px solid #facc15;
+        cursor: pointer;
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  outline: none;
-  background: rgba(255, 255, 255, 0.1);
-  border-color: #facc15;
-  box-shadow: 0 0 20px rgba(250, 204, 21, 0.2);
-}
+        border: 1px solid #facc15;
+        margin: 20px 0;
+        grid-column: 1 / -1;
+      }
 
-.form-icon {
-  position: absolute;
-  right: 12px;
-  top: 38px;
-  color: #facc15;
-  pointer-events: none;
-}
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
 
-.form-group.checkbox {
-  flex-direction: row;
-  align-items: center;
-  margin-top: 10px;
-}
+      .summary-row.total {
+        border-top: 2px solid #facc15;
+        padding-top: 10px;
+        margin-bottom: 0;
+        font-size: 18px;
+        font-weight: 700;
+        color: #facc15;
+      }
 
-.form-group.checkbox label {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: normal;
-  cursor: pointer;
-}
+      .rate-value {
+        color: #facc15;
+        font-weight: 600;
+      }
 
-.form-group.checkbox input {
-  width: auto;
-  padding: 0;
-  background: none;
-  border: 1px solid #facc15;
-  cursor: pointer;
-  accent-color: #facc15;
-}
+      .submit-btn {
+        padding: 14px 30px;
+        background: linear-gradient(135deg, #facc15, #f59e0b);
+        color: black;
+        border: none;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(250, 204, 21, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        grid-column: 1 / -1;
+        margin-top: 10px;
+      }
 
-.cost-summary {
-  background: rgba(250, 204, 21, 0.1);
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid #facc15;
-  margin: 20px 0;
-  grid-column: 1 / -1;
-}
+      .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px rgba(250, 204, 21, 0.5);
+      }
 
-.summary-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  font-size: 14px;
-}
+      .security-info {
+        text-align: center;
+        color: #94a3b8;
+        font-size: 12px;
+        margin-top: 15px;
+        grid-column: 1 / -1;
+      }
 
-.summary-row.total {
-  border-top: 2px solid #facc15;
-  padding-top: 10px;
-  margin-bottom: 0;
-  font-size: 18px;
-  font-weight: 700;
-  color: #facc15;
-}
+      .booking-info {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        padding: 30px;
+        border-radius: 15px;
+        border: 1px solid #1e293b;
+        position: sticky;
+        top: 100px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
 
-.rate-value {
-  color: #facc15;
-  font-weight: 600;
-}
+      .booking-info h3 {
+        color: #facc15;
+        margin-bottom: 25px;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
 
-.submit-btn {
-  padding: 14px 30px;
-  background: linear-gradient(135deg, #facc15, #f59e0b);
-  color: black;
-  border: none;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(250, 204, 21, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  grid-column: 1 / -1;
-  margin-top: 10px;
-}
+      .info-item {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
 
-.submit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 25px rgba(250, 204, 21, 0.5);
-}
+      .info-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #facc15, #f59e0b);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        font-size: 18px;
+        flex-shrink: 0;
+      }
 
-.security-info {
-  text-align: center;
-  color: #94a3b8;
-  font-size: 12px;
-  margin-top: 15px;
-  grid-column: 1 / -1;
-}
+      .info-text h4 {
+        color: #e2e8f0;
+        margin-bottom: 5px;
+        font-size: 14px;
+      }
 
-.booking-info {
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  padding: 30px;
-  border-radius: 15px;
-  border: 1px solid #1e293b;
-  height: fit-content;
-  position: sticky;
-  top: 100px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
+      .info-text p {
+        color: #94a3b8;
+        font-size: 13px;
+        margin: 0;
+      }
 
-.booking-info h3 {
-  color: #facc15;
-  margin-bottom: 25px;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+      .booking-contact {
+        background: rgba(250, 204, 21, 0.1);
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #facc15;
+        margin-top: 25px;
+      }
 
-.info-item {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 20px;
-}
+      .booking-contact h4 {
+        color: #facc15;
+        margin-bottom: 10px;
+      }
 
-.info-icon {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, #facc15, #f59e0b);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: black;
-  font-size: 18px;
-  flex-shrink: 0;
-}
+      .booking-contact p {
+        color: #94a3b8;
+        margin: 8px 0;
+        font-size: 13px;
+      }
 
-.info-text h4 {
-  color: #e2e8f0;
-  margin-bottom: 5px;
-  font-size: 14px;
-}
+      .booking-contact a {
+        color: #facc15;
+        text-decoration: none;
+        font-weight: 600;
+      }
 
-.info-text p {
-  color: #94a3b8;
-  font-size: 13px;
-  margin: 0;
-}
+      .booking-contact a:hover {
+        text-decoration: underline;
+      }
 
-.booking-contact {
-  background: rgba(250, 204, 21, 0.1);
-  padding: 15px;
-  border-radius: 8px;
-  border: 1px solid #facc15;
-  margin-top: 25px;
-}
+      @media (max-width: 1024px) {
+        .booking-container {
+          grid-template-columns: 1fr;
+        }
 
-.booking-contact h4 {
-  color: #facc15;
-  margin-bottom: 10px;
-}
+        .booking-info {
+          position: static;
+        }
+      }
 
-.booking-contact p {
-  color: #94a3b8;
-  margin: 8px 0;
-  font-size: 13px;
-}
+      @media (max-width: 768px) {
+        .booking-page {
+          padding: 100px 15px 20px;
+        }
 
-.booking-contact a {
-  color: #facc15;
-  text-decoration: none;
-  font-weight: 600;
-}
+        .booking-content {
+          padding: 25px;
+        }
 
-.booking-contact a:hover {
-  text-decoration: underline;
-}
+        .booking-header h1 {
+          font-size: 24px;
+        }
 
-@media (max-width: 1024px) {
-  .booking-container {
-    grid-template-columns: 1fr;
-  }
+        .form-row {
+          grid-template-columns: 1fr;
+        }
 
-  .booking-info {
-    position: static;
-  }
-}
+        .booking-info {
+          padding: 20px;
+        }
+      }
 
-@media (max-width: 768px) {
-  .booking-page {
-    padding: 100px 15px 20px;
-  }
+      @media (max-width: 480px) {
+        .booking-page {
+          padding: 100px 10px 20px;
+        }
 
-  .booking-content {
-    padding: 25px;
-  }
+        .booking-content {
+          padding: 15px;
+        }
 
-  .booking-header h1 {
-    font-size: 24px;
-  }
+        .booking-header h1 {
+          font-size: 20px;
+        }
 
-  .form-row {
-    grid-template-columns: 1fr;
-  }
+        .form-group input,
+        .form-group select {
+          padding: 10px 35px 10px 10px;
+          font-size: 12px;
+        }
 
-  .booking-info {
-    padding: 20px;
-  }
-}
+        .submit-btn {
+          padding: 12px 20px;
+          font-size: 14px;
+        }
 
-@media (max-width: 480px) {
-  .booking-page {
-    padding: 100px 10px 20px;
-  }
+        .form-icon {
+          right: 10px;
+          top: 36px;
+          font-size: 14px;
+        }
+      }
+    </style>
 
-  .booking-content {
-    padding: 15px;
-  }
+    <script>
+      // Get car from URL parameters
+      const params = new URLSearchParams(window.location.search)
+      const selectedCar = params.get('car')
+      const carSelect = document.getElementById('car')
+      carSelect.value = selectedCar || 'Toyota Land Cruiser Prado'
 
-  .booking-header h1 {
-    font-size: 20px;
-  }
+      const bookingRates = {
+        'Toyota Land Cruiser Prado': 180,
+        'Toyota Hiace': 120,
+        'Toyota Quantum': 150,
+        'Toyota Corolla': 55,
+        'Suzuki Swift': 45,
+        'Yamaha YBR 125': 30,
+      }
 
-  .form-group input,
-  .form-group select {
-    padding: 10px 35px 10px 10px;
-    font-size: 12px;
-  }
+      function getDailyRate(carName, service) {
+        const baseRate = bookingRates[carName] || 50
+        return service === 'With Driver' ? baseRate + 40 : baseRate
+      }
 
-  .submit-btn {
-    padding: 12px 20px;
-    font-size: 14px;
-  }
+      // Update cost summary
+      function updateCostSummary() {
+        const carName = document.getElementById('car').value
+        const service = document.getElementById('service').value
+        const pickupDate = document.getElementById('date').value
+        const returnDate = document.getElementById('returnDate').value
 
-  .form-icon {
-    right: 10px;
-    top: 36px;
-    font-size: 14px;
-  }
-}
-</style>
+        let dailyRate = getDailyRate(carName, service)
 
-<script>
-// Get car from URL parameters
-const params = new URLSearchParams(window.location.search);
-const selectedCar = params.get("car");
-document.getElementById("car").value = selectedCar || "";
+        if (pickupDate && returnDate) {
+          const pickup = new Date(pickupDate)
+          const returnD = new Date(returnDate)
+          const days = Math.ceil((returnD - pickup) / (1000 * 60 * 60 * 24))
 
-// Update cost summary
-function updateCostSummary() {
-  const carName = document.getElementById("car").value;
-  const service = document.getElementById("service").value;
-  const pickupDate = document.getElementById("date").value;
-  const returnDate = document.getElementById("returnDate").value;
+          if (days > 0) {
+            document.getElementById('numDays').textContent = days
+            const total = dailyRate * days
+            document.getElementById('totalCost').textContent = '$' + total
+          } else {
+            document.getElementById('numDays').textContent = 0
+            document.getElementById('totalCost').textContent = '$0'
+          }
+        }
 
-  let dailyRate = 0;
-  
-  if (window.carDatabase) {
-    const car = window.carDatabase.find(c => c.name === carName);
-    if (car) {
-      dailyRate = service === "With Professional Driver" ? car.withDriver : car.noDriver;
-    }
-  }
+        document.getElementById('dailyRate').textContent = '$' + dailyRate
+      }
 
-  if (pickupDate && returnDate) {
-    const pickup = new Date(pickupDate);
-    const returnD = new Date(returnDate);
-    const days = Math.ceil((returnD - pickup) / (1000 * 60 * 60 * 24));
-    
-    if (days > 0) {
-      document.getElementById("numDays").textContent = days;
-      const total = dailyRate * days;
-      document.getElementById("totalCost").textContent = "$" + total;
-    }
-  }
+      // Add event listeners
+      document
+        .getElementById('service')
+        .addEventListener('change', updateCostSummary)
+      document
+        .getElementById('car')
+        .addEventListener('change', updateCostSummary)
+      document
+        .getElementById('date')
+        .addEventListener('change', updateCostSummary)
+      document
+        .getElementById('returnDate')
+        .addEventListener('change', updateCostSummary)
 
-  document.getElementById("dailyRate").textContent = "$" + dailyRate;
-}
+      // Handle form submission
+      document
+        .getElementById('bookingForm')
+        .addEventListener('submit', function (e) {
+          e.preventDefault()
 
-// Add event listeners
-document.getElementById("service").addEventListener("change", updateCostSummary);
-document.getElementById("date").addEventListener("change", updateCostSummary);
-document.getElementById("returnDate").addEventListener("change", updateCostSummary);
+          const name = document.getElementById('name').value
+          const phone = document.getElementById('phone').value
+          const email = document.getElementById('email').value
+          const car = document.getElementById('car').value
+          const service = document.getElementById('service').value
+          const date = document.getElementById('date').value
+          const returnDate = document.getElementById('returnDate').value
+          const passengers = document.getElementById('passengers').value
+          const message = document.getElementById('message').value
+          const totalCost = document.getElementById('totalCost').textContent
 
-// Handle form submission
-document.getElementById("bookingForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const email = document.getElementById("email").value;
-  const car = document.getElementById("car").value;
-  const service = document.getElementById("service").value;
-  const date = document.getElementById("date").value;
-  const returnDate = document.getElementById("returnDate").value;
-  const passengers = document.getElementById("passengers").value;
-  const message = document.getElementById("message").value;
-  const totalCost = document.getElementById("totalCost").textContent;
-
-  const text = `
+          const text = `
 ✨ *MUKASA TRANSPORT SERVICE - BOOKING REQUEST* ✨
 
 👤 *CUSTOMER DETAILS*
@@ -660,21 +702,20 @@ Return: ${returnDate}
 Estimated Total: ${totalCost}
 
 📝 *SPECIAL REQUESTS*
-${message || "None"}
+${message || 'None'}
 
 ---
 Thank you for choosing Mukasa Transport Service!
 We will confirm your booking shortly.
-  `;
+  `
 
-  window.open(
-    `https://wa.me/250791758953?text=${encodeURIComponent(text)}`,
-    "_blank"
-  );
-});
+          window.open(
+            `https://wa.me/250791758953?text=${encodeURIComponent(text)}`,
+            '_blank',
+          )
+        })
 
-updateCostSummary();
-</script>
-
-</body>
+      updateCostSummary()
+    </script>
+  </body>
 </html>
